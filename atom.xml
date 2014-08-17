@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[eckig]]></title>
+  <link href="http://eckig.github.io/atom.xml" rel="self"/>
+  <link href="http://eckig.github.io/"/>
+  <updated>2014-08-17T15:42:56+02:00</updated>
+  <id>http://eckig.github.io/</id>
+  <author>
+    <name><![CDATA[Steffen Rachner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://eckig.github.io/blog/2014/08/17/hello-world/"/>
+    <updated>2014-08-17T15:31:03+02:00</updated>
+    <id>http://eckig.github.io/blog/2014/08/17/hello-world</id>
+    <content type="html"><![CDATA[<p>I just finished developing my first Octopress theme.</p>
+
+<p>I hope to add some meaningful content soon ;-)</p>
+]]></content>
+  </entry>
+  
+</feed>
