@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | eckig]]></title>
+  <link href="http://eckig.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://eckig.github.io/"/>
+  <updated>2014-08-18T23:17:25+02:00</updated>
+  <id>http://eckig.github.io/</id>
+  <author>
+    <name><![CDATA[Steffen Rachner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JavaFX Color Derivation]]></title>
+    <link href="http://eckig.github.io/blog/2014/08/18/javafx-color-derivation/"/>
+    <updated>2014-08-18T18:35:51+02:00</updated>
+    <id>http://eckig.github.io/blog/2014/08/18/javafx-color-derivation</id>
+    <content type="html"><![CDATA[<p>A very powerful and often underestimated feature of JavaFX is its CSS Color Derivation.<br/>
+But let us start at the beginning by explaining two prerequisites:</p>
+
+<ol>
+<li>The Default JavaFX 8 Theme (<a href="http://fxexperience.com/2013/01/modena-new-theme-for-javafx-8/">Modena</a>) only defines a few colors statically in its stylesheet. The rest is derived by JavaFX&rsquo;s color functions (ladder and derive - see the <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html#typecolor">CSS Reference</a>) or referenced as color variables.</li>
+<li>If you start to apply a custom styles to a Node in the scenegraph, these styles will also be applied to all children of this Node (if applicable). So changing a color variable on a single node will change the corresponding colors, derived colors and referenced colors on all child nodes in the scenegraph, but not on any of its parent nodes.</li>
+</ol>
+
+
+<p>If we combine both together we can create these three Buttons with ease (the first one is a regular one, just to show the default theme):<br/>
+<img src="/assets/images/javafx-color-derivation-screenshot-1.png" alt="Java FX Color derivation example" /></p>
+
+<!-- more -->
+
+
+<p>But let&rsquo;s start with the Java Code for our little example:</p>
+
+<pre><code class="java Test.java">public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Button red = new Button("red");
+        red.getStyleClass().add("red");
+
+        Button green = new Button("green");
+        green.getStyleClass().add("green");
+
+        Button regular = new Button("regular");
+
+        BorderPane root = new BorderPane();
+        root.setTop(new ToolBar(regular, red, green));
+        Scene scene = new Scene(root, 400, 400);
+        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+</code></pre>
+
+<p>Essentially we create some buttons, stuff them into a ToolBar and it to the Scene. Additionally we assign some style classes in order to do the color magic later on.<br/>
+Doing the old school way we would have ended up editing all of the buttons colors.</p>
+
+<p>But if we take a closer look at the default button colors..</p>
+
+<pre><code class="css modena.css">.button {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-text-fill: -fx-text-base-color;
+}
+</code></pre>
+
+<p>..you may see the colors are referenced, and as you may guess they are derived of the aforementioned base colors.<br/>
+For example look at the border color, defined in the root of the modena theme:</p>
+
+<pre><code class="css modena.css">.root {
+    -fx-outer-border: derive(-fx-color, -23%);
+}
+</code></pre>
+
+<p>So to put all of this together, we only need these simple rules in our CSS file:</p>
+
+<pre><code class="css application.css">.red {
+    -fx-base: red;
+}
+.green {
+    -fx-base: green;
+}
+</code></pre>
+
+<p>What happens is that we changed the base color on each of the buttons. Now JavaFX is clever enough to detect that with a different base color, the derived colors for each of the buttons (and its children) need an update.</p>
+
+<h2>Wait there&rsquo;s more</h2>
+
+<p>Now this was a very basic example, but to give you another example we can switch the base color of the root container to create our own &ldquo;dark theme&rdquo;:
+<code>css application.css
+.root {
+    -fx-base: darkgray;
+}
+</code></p>
+
+<p>This will result in this darker version of our sample application:<br/>
+<img src="/assets/images/javafx-color-derivation-screenshot-2.png" alt="Java FX Color derivation example" /><br/>
+Using derived colors throughout your application will make your life a lot easier!</p>
+]]></content>
+  </entry>
+  
+</feed>

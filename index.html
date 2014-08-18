@@ -15,7 +15,8 @@
   <meta name="author" content="Steffen Rachner">
 
   
-  <meta name="description" content=" Hello World I just finished developing my first Octopress theme. I hope to add some meaningful content soon ;-) 17 Aug 2014 Blog Archives ">
+  <meta name="description" content="JavaFX Color Derivation A very powerful and often underestimated feature of JavaFX is its CSS Color Derivation.
+But let us start at the beginning by &hellip;">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,6 +48,51 @@
   <div id="content-wrapper">
 	<div class="blog-index">
   
+  
+  
+    <article class="post format-standard"><div class="inner">
+      <header>
+	
+	  <h1 class="entry-title"><a href="/blog/2014/08/18/javafx-color-derivation/">JavaFX Color Derivation</a></h1>
+	
+</header>
+
+  <p>A very powerful and often underestimated feature of JavaFX is its CSS Color Derivation.<br/>
+But let us start at the beginning by explaining two prerequisites:</p>
+
+<ol>
+<li>The Default JavaFX 8 Theme (<a href="http://fxexperience.com/2013/01/modena-new-theme-for-javafx-8/">Modena</a>) only defines a few colors statically in its stylesheet. The rest is derived by JavaFX&rsquo;s color functions (ladder and derive - see the <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html#typecolor">CSS Reference</a>) or referenced as color variables.</li>
+<li>If you start to apply a custom styles to a Node in the scenegraph, these styles will also be applied to all children of this Node (if applicable). So changing a color variable on a single node will change the corresponding colors, derived colors and referenced colors on all child nodes in the scenegraph, but not on any of its parent nodes.</li>
+</ol>
+
+
+<p>If we combine both together we can create these three Buttons with ease (the first one is a regular one, just to show the default theme):<br/>
+<img src="/assets/images/javafx-color-derivation-screenshot-1.png" alt="Java FX Color derivation example" /></p>
+
+
+  
+    
+
+	<time class='entry-date' datetime='2014-08-18T18:35:51+02:00'>
+	  <span class='date'>
+		<span class='date-day'>18</span>
+		<span class='date-month'>Aug</span>
+		<span class='date-year'>2014</span>
+	  </span>
+	</time>
+
+
+  
+  
+  
+  
+	<footer>
+	  <a rel="full-article" href="/blog/2014/08/18/javafx-color-derivation/">Read on &rarr;</a>
+	</footer>
+  
+
+
+    </div></article>
   
   
     <article class="post format-standard"><div class="inner">

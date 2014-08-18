@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://eckig.github.io/blog/2014/08/18/javafx-color-derivation/</loc>
+    <lastmod>2014-08-18T18:35:51+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://eckig.github.io/blog/2014/08/17/hello-world/</loc>
     <lastmod>2014-08-17T15:31:03+02:00</lastmod>
     <priority>0.8</priority>
@@ -11,14 +17,14 @@
   
   <url>
     <loc>http://eckig.github.io/blog/archives/</loc>
-    <lastmod>2014-08-17T15:51:56+02:00</lastmod>
+    <lastmod>2014-08-18T23:17:25+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://eckig.github.io/</loc>
-    <lastmod>2014-08-17T15:51:56+02:00</lastmod>
+    <lastmod>2014-08-18T23:17:25+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
