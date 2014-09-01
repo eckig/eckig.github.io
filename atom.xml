@@ -4,7 +4,7 @@
   <title><![CDATA[eckig]]></title>
   <link href="http://eckig.github.io/atom.xml" rel="self"/>
   <link href="http://eckig.github.io/"/>
-  <updated>2014-08-19T19:56:34+02:00</updated>
+  <updated>2014-09-01T20:35:49+02:00</updated>
   <id>http://eckig.github.io/</id>
   <author>
     <name><![CDATA[Steffen Rachner]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using JavaFX's Properties]]></title>
+    <link href="http://eckig.github.io/blog/2014/09/01/using-javafxs-properties/"/>
+    <updated>2014-09-01T19:48:48+02:00</updated>
+    <id>http://eckig.github.io/blog/2014/09/01/using-javafxs-properties</id>
+    <content type="html"><![CDATA[<p>First a general reminder: Do not get into <a href="http://blog.codinghorror.com/the-sad-tragedy-of-micro-optimization-theater/">micro-optimization</a> - It clutters the code for little to no benefit!</p>
+
+<p>So with JavaFX we got a very nice API for writing user interface applications and with Java 8&rsquo;s Lambda Expressions it is even more fun. Just a single line of code is needed to wire up a new listener:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">event</span><span class="o">.</span><span class="na">resultStatusProperty</span><span class="o">().</span><span class="na">addListener</span><span class="o">(</span><span class="n">obs</span> <span class="o">-&gt;</span> <span class="n">doMagic</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<!-- more -->
+
+
+<p>Now that is not a bad thing at all, but I have seen two common things that developers thend to ignore or do not know:</p>
+
+<h2>1. Creating a JavaFX Property</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="kd">final</span> <span class="n">ObjectProperty</span><span class="o">&lt;</span><span class="n">ResultStatus</span><span class="o">&gt;</span> <span class="n">resultStatus</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">new</span> <span class="n">SimpleObjectProperty</span><span class="o">&lt;&gt;(</span><span class="k">this</span><span class="o">,</span> <span class="s">&quot;resultStatus&quot;</span><span class="o">,</span> <span class="n">initialResultStatus</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+This is an example of an ObjectProperty, but the other (primitive type) Properties work the same way: As definied in <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/property/ReadOnlyProperty.html">javafx.beans.property.ReadOnlyProperty</a> every Property has a <strong>bean</strong> and a <strong>name</strong> as additional, optional attributes.<br/>
+I often see JavaFX code creating Properties only using the value side, leaving out bean and name. Why should I use it, you ask? Well, let us move on:</p>
+
+<h2>2. Using JavaFX Property Listeners</h2>
+
+<p>There are two types of a listener that may be added to a JavaFX Property:</p>
+
+<ol>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/InvalidationListener.html">InvalidationListener</a></li>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/value/ChangeListener.html">ChangeListener</a></li>
+</ol>
+
+
+<p>I won&rsquo;t go much into detail discussing the pros and cons of every one, this would be out of scope of this article. Maybe another time.<br/>
+Besides having different names and different use cases, they have some things in common:</p>
+
+<ul>
+<li>They are both functional interfaces, so they may be expressed as Lambdas</li>
+<li>Both receive an <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/beans/Observable.html">Observable</a> passed on as first argument on each change.</li>
+</ul>
+
+
+<p>Well, our ObjectProperty for instance and every other JavaFX property is implementing Observable!</p>
+
+<h2>Example</h2>
+
+<p>Let us assume, we have an application tracking server-side events. There are thousands of them over the course of a day. The server will push new events to our client application. But the event will be in progress and we can not process the event(s) until they are finished.<br/>
+The naive way of doing this would be to just do this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">event</span><span class="o">.</span><span class="na">resultStatusProperty</span><span class="o">().</span><span class="na">addListener</span><span class="o">(</span><span class="n">obs</span> <span class="o">-&gt;</span> <span class="n">doMagic</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+on every incoming event. Works great. Time to go home.<br/>
+But since our client application is already struggling by dealing with thousands of events we can actually improve client load by using what I just tried to explain:</p>
+
+<h2>Creating the Listener</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">InvalidationListener</span> <span class="n">resultStatusListener</span> <span class="o">=</span> <span class="n">pObservable</span> <span class="o">-&gt;</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">pObservable</span> <span class="k">instanceof</span> <span class="n">ObjectProperty</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>      <span class="o">((</span><span class="n">ObjectProperty</span><span class="o">&lt;?&gt;)</span> <span class="n">pObservable</span><span class="o">).</span><span class="na">getBean</span><span class="o">()</span> <span class="k">instanceof</span> <span class="n">ArchiveEvent</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">ArchiveEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="o">(</span><span class="n">ArchiveEvent</span><span class="o">)</span> <span class="o">((</span><span class="n">ObjectProperty</span><span class="o">&lt;?&gt;)</span> <span class="n">pObservable</span><span class="o">).</span><span class="na">getBean</span><span class="o">();</span>
+</span><span class='line'>      <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getResultStatus</span><span class="o">())</span>
+</span><span class='line'>      <span class="o">{</span>
+</span><span class='line'>          <span class="k">case</span> <span class="nl">SUCCESS:</span>
+</span><span class='line'>              <span class="c1">// TODO</span>
+</span><span class='line'>              <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="nl">FAILED:</span>
+</span><span class='line'>              <span class="c1">// TODO</span>
+</span><span class='line'>              <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="nl">WARNING:</span>
+</span><span class='line'>              <span class="c1">// TODO</span>
+</span><span class='line'>              <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have created THE listener, we just use this <strong>one instance</strong> on every result property of every incoming event.<br/>
+And it is quite simple: Every time a property becomes invalid we check if it is an instance of our result property and if the bean has been properly set (instanceof does an implicit null check).</p>
+
+<p>And this is just a small example, you can go further on by not only using the bean but also name of the property.<br/>
+Yes, you will need a few more lines of code for checking and casting but that saved you a lot of memory if you create/attach serious amounts of listeners.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JavaFX Color Derivation]]></title>
