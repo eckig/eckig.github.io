@@ -11,11 +11,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - eckig</title>
+  <title>Resizable Grid Using Canvas - eckig</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://eckig.github.io/blog/archives">
+  <link rel="canonical" href="http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas">
   <link href="/favicon.png" rel="icon">
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -40,79 +40,50 @@
 <div class="header-bottom"></div>
 </header>
   <div id="content-wrapper">
-	<article role="page">
-  
+	<article class="post format-standard" role="article"><div class="inner">
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
-    
-  </header>
-  
-  <div id="blog-archives">
-
 	
+	  <h1 class="entry-title">Resizable Grid Using Canvas</h1>
 	
-	  <article class="post"><div class="inner format-standard">
-	  
-	  <h2 class="archive-year">2014</h2>
-	
-	<article>
-	  
-<h1><a href="/blog/2014/11/06/resizable-grid-using-canvas/">Resizable Grid Using Canvas</a></h1>
-<time datetime="2014-11-06T18:38:10+01:00" pubdate><span class='month'>Nov</span> <span class='day'>06</span> <span class='year'>2014</span></time>
+</header>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/java/'>java</a></span>
-</footer>
+<div class="entry-content"><p>Inspired by <a href="http://fxexperience.com/2014/05/resizable-grid-using-canvas/">Jasper Potts post showing how to create a resizable &ldquo;DotGrid&rdquo;</a> in JavaFX using the <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/Canvas.html">Canvas API</a> I went ahead and modified a bit, because I needed a similar approach for a contribution.</p>
 
+<p>So I changed the visuals to actually draw a grid (horizontal and vertical lines) instead of dots and added styleable CSS properties to customize grid size and color via CSS.</p>
 
-	</article>
-
-	
-	
-	
-	<article>
-	  
-<h1><a href="/blog/2014/09/01/using-javafxs-properties/">Using JavaFX's Properties</a></h1>
-<time datetime="2014-09-01T19:48:48+02:00" pubdate><span class='month'>Sep</span> <span class='day'>01</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/java/'>java</a></span>
-</footer>
-
-
-	</article>
-
-	
-	
-	
-	<article>
-	  
-<h1><a href="/blog/2014/08/18/javafx-color-derivation/">JavaFX Color Derivation</a></h1>
-<time datetime="2014-08-18T18:35:51+02:00" pubdate><span class='month'>Aug</span> <span class='day'>18</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/java/'>java</a></span>
-</footer>
-
-
-	</article>
-
-	
-	
-	
-	<article>
-	  
-<h1><a href="/blog/2014/08/17/hello-world/">Hello World</a></h1>
-<time datetime="2014-08-17T15:31:03+02:00" pubdate><span class='month'>Aug</span> <span class='day'>17</span> <span class='year'>2014</span></time>
-
-
-	</article>
-
-</div></article>
+<p>You can view the final <a href="https://gist.github.com/eckig/176b7c2a10048bb71f43">Code at Github</a>.
+If you are concerned about its performance, you may even increase its speed by only redrawing the part of the canvas that has changed..</p>
 </div>
 
+
   
-</article>
+	<time class='entry-date' datetime='2014-11-06T18:38:10+01:00'>
+	  <span class='date'>
+		<span class='date-day'>06</span>
+		<span class='date-month'>Nov</span>
+		<span class='date-year'>2014</span>
+	  </span>
+	</time>
+
+
+
+</div></article>
+
+<div class="pagination"><div class="inner">
+	  
+        <a class="basic-alignment left" href="/blog/2014/09/01/using-javafxs-properties/" title="Previous Post: Using JavaFX's Properties">&laquo; Using JavaFX's Properties</a>
+      
+      
+</div></div>
+
+
+  <section id="comments">
+	<div class="inner">
+		<h1>Comments</h1>
+		<div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+	</div>
+  </section>
 
 
 
@@ -126,7 +97,10 @@
       var disqus_shortname = 'eckig';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas/';
+        var disqus_url = 'http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | eckig]]></title>
   <link href="http://eckig.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://eckig.github.io/"/>
-  <updated>2014-09-01T20:35:49+02:00</updated>
+  <updated>2014-11-06T18:57:15+01:00</updated>
   <id>http://eckig.github.io/</id>
   <author>
     <name><![CDATA[Steffen Rachner]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Resizable Grid Using Canvas]]></title>
+    <link href="http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas/"/>
+    <updated>2014-11-06T18:38:10+01:00</updated>
+    <id>http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas</id>
+    <content type="html"><![CDATA[<p>Inspired by <a href="http://fxexperience.com/2014/05/resizable-grid-using-canvas/">Jasper Potts post showing how to create a resizable &ldquo;DotGrid&rdquo;</a> in JavaFX using the <a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/Canvas.html">Canvas API</a> I went ahead and modified a bit, because I needed a similar approach for a contribution.</p>
+
+<p>So I changed the visuals to actually draw a grid (horizontal and vertical lines) instead of dots and added styleable CSS properties to customize grid size and color via CSS.</p>
+
+<p>You can view the final <a href="https://gist.github.com/eckig/176b7c2a10048bb71f43">Code at Github</a>.
+If you are concerned about its performance, you may even increase its speed by only redrawing the part of the canvas that has changed..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using JavaFX's Properties]]></title>
@@ -28,7 +42,7 @@
 <!-- more -->
 
 
-<p>Now that is not a bad thing at all, but I have seen two common things that developers thend to ignore or do not know:</p>
+<p>Now that is not a bad thing at all, but I have seen two common things that developers tend to ignore or do not know:</p>
 
 <h2>1. Creating a JavaFX Property</h2>
 
