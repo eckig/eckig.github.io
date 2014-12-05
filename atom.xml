@@ -4,7 +4,7 @@
   <title><![CDATA[eckig]]></title>
   <link href="http://eckig.github.io/atom.xml" rel="self"/>
   <link href="http://eckig.github.io/"/>
-  <updated>2014-11-13T20:52:28+01:00</updated>
+  <updated>2014-12-05T07:35:06+01:00</updated>
   <id>http://eckig.github.io/</id>
   <author>
     <name><![CDATA[Steffen Rachner]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bidirectional Binding for Selection Model]]></title>
+    <link href="http://eckig.github.io/blog/2014/12/05/bidirectional-binding-for-selection-model/"/>
+    <updated>2014-12-05T07:17:47+01:00</updated>
+    <id>http://eckig.github.io/blog/2014/12/05/bidirectional-binding-for-selection-model</id>
+    <content type="html"><![CDATA[<p>I do not know why the JavaFX developers have not included this in the existing toolset, so I created this by myself based on the JavaFX BidirectionalBinding class: A BidirectionalBinding between a <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/SelectionModel.html">SelectionModel</a> and an <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/beans/property/ObjectProperty.html">ObjectProperty</a>.</p>
+
+<p>Whenever the ObjectProperty changes, the selection is updated and when the selection changes the ObjectProperty is updated. I <a href="https://gist.github.com/eckig/03c6c2d6920c69b79ad4">posted the code at Github</a>.</p>
+
+<p>Usage is typically by a static factory method, so here you go:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">bindBidirectional</span><span class="o">(</span><span class="n">Property</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">pProperty</span><span class="o">,</span>
+</span><span class='line'>      <span class="n">SelectionModel</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">pSelectionModel</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">pInitialValueFromSelection</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">SelectionModelBidirectionalBinding</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">binding</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SelectionModelBidirectionalBinding</span><span class="o">&lt;&gt;(</span>
+</span><span class='line'>          <span class="n">pProperty</span><span class="o">,</span> <span class="n">pSelectionModel</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">pInitialValueFromSelection</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">pProperty</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">pSelectionModel</span><span class="o">.</span><span class="na">getSelectedItem</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">pSelectionModel</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">pProperty</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">pProperty</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">binding</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">pSelectionModel</span><span class="o">.</span><span class="na">selectedItemProperty</span><span class="o">().</span><span class="na">addListener</span><span class="o">(</span><span class="n">binding</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method differs a little bit from the default JavaFX BidirectionalBindings by adding a third argument: The boolean argument is to decide where the initial value should be extracted from: Either from the ObjectProperty or the SelectionModel.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Resizable Grid Using Canvas]]></title>
