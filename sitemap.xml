@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://eckig.github.io/blog/2014/12/05/bidirectional-binding-for-selection-model/</loc>
+    <lastmod>2014-12-05T08:03:23+01:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://eckig.github.io/blog/2014/11/06/resizable-grid-using-canvas/</loc>
     <lastmod>2014-11-06T18:38:10+01:00</lastmod>
     <priority>0.8</priority>
@@ -29,21 +35,21 @@
   
   <url>
     <loc>http://eckig.github.io/blog/archives/</loc>
-    <lastmod>2014-12-05T08:02:17+01:00</lastmod>
+    <lastmod>2014-12-05T08:05:19+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://eckig.github.io/</loc>
-    <lastmod>2014-12-05T08:02:17+01:00</lastmod>
+    <lastmod>2014-12-05T08:05:19+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://eckig.github.io/about/</loc>
-    <lastmod>2014-12-05T08:02:17+01:00</lastmod>
+    <lastmod>2014-12-05T08:05:19+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
